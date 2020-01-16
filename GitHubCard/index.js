@@ -53,3 +53,39 @@ const followersArray = [];
   luishrd
   bigknell
 */
+
+function gitCard(user, name, location, url) {
+  const newCard = document.createElement('div'),
+  newImage = document.createElement('img'),
+  cardInfo = document.createElement('div'),
+  user = document.createElement('h3'),
+  userName = document.createElement('p'),
+  location = document.createElement('p'),
+  profile = document.createElement('a'),
+  followers = document.createElement('p'),
+  following = document.createElement('p'),
+  bio = document.createElement('p'),
+
+  newImage.src = imgUrl;
+ user.textContent = title;
+userName.textContent = content;
+location.textContent = content;
+profile.textContent = content;
+followers.textContent = content;
+following.textContent = content;
+bio.textContent = content;
+
+newCard.classList.add('cards');
+newImage.classList.add('header img');
+cardInfo.classList.add('card');
+user.classList.add('header');
+userName.classList.add('username');
+bio.classList.add('p');
+
+newCard.append('newImage'),
+newCard.append('cardInfo');
+cardInfo.append('user');
+cardInfo.append('userName', 'location', 'profile', 'followers', 'following', 'bio');
+
+return newCard;
+}
