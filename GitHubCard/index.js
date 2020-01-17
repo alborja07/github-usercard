@@ -25,17 +25,27 @@
 */
 
 const followersArray = [
+  "dakotacahill",
+  "gideonogbuagu",
+  "Kat2bk",
+  "SethC16",
+  "Kylecole01",
+  "MaxiCB"
 ];
 
-// followersArray.forEach(person => {
-//   axios.get(`https//api.github.com/users/${person}`)
-//   .then(response => {
-//     entryPoint.append(gitCard(response))
-//   })
-//   .catch(error => {
-//     console.log('The data did not go through', error);
-//   });
-// })
+container = document.querySelector(".cards");
+
+for (var i = 0; i < followersArray.length; i++){
+axios.get("https://api.github.com/users/" + followersArray[i])
+.then(response => {
+    console.log(response);  
+  container.appendChild(gitCard(response.data));
+   })
+
+.catch(error => {
+  console.log('the data did not go through', error);
+});
+}
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
@@ -79,14 +89,14 @@ function gitCard(obj) {
         following = document.createElement('p'),
         bio = document.createElement('p');
         
-newImage.setAttribute('src', obj.data.avatar_url);
-user.textContent = obj.data.name;
-userName.textContent = obj.data.login;
-location.textContent = `Location: ${obj.data.location}`;
-profile.setAttribute('href', obj.data.html_url);
-followers.textContent = `Followers: ${obj.data.followers}`;
-following.textContent = `Following: ${obj.data.following}`;
-bio.textContent = `Bio: ${obj.data.bio}`;
+newImage.setAttribute('src', obj.avatar_url);
+user.textContent = obj.name;
+userName.textContent = obj.login;
+location.textContent = `Location: ${obj.location}`;
+profile.setAttribute('href', obj.html_url);
+followers.textContent = `Followers: ${obj.followers}`;
+following.textContent = `Following: ${obj.following}`;
+bio.textContent = `Bio: ${obj.bio}`;
 
 newCard.classList.add('card');
 // newImage.classList.add('header');
@@ -110,83 +120,17 @@ return newCard;
 
 
 
-// const entryPoint = document.querySelector(".cards");
-
-// console.log(entryPoint)
-
-// axios.get("https://api.github.com/users/alborja07")
-// .then(response => {
-//   console.log(response);
-
-//   entryPoint.append(gitCard(response));
-//   })
-
-// .catch(error => {
-//   console.log('the data did not go through', error)
-// });
-
-// 
-// 
-// 
-// 
-// 
-
-
-
-
-
-
-
 const entryPoint = document.querySelector(".cards");
 
 console.log(entryPoint)
 
-axios.get("https://api.github.com/users/alborja07/followers")
+axios.get("https://api.github.com/users/alborja07")
 .then(response => {
-    console.log(response);  
-  response.data.forEach(item => {
-    const newPerson = gitCard(response);
-    entryPoint.append(gitCard(response))
+   entryPoint.append(gitCard(response.data));
   })
-  entryPoint.append(gitCard(response));
-  })
-
 .catch(error => {
   console.log('the data did not go through', error)
 });
 
-  // console.log(response);
-//   followersArray.forEach(person => {
-//     axios.get("https://api.github.com/users/alborja07/followers")
-// .then(response => {
-//     // const newPerson = gitCard(response);
-//     entryPoint.append(gitCard(response))
-//   })
-// })
-// .catch(error => {
-//   console.log('the data did not go through', error)
-// });
 
 
-// followersArray.forEach(person => {
-//   axios.get(`https//api.github.com/users/${person}`)
-//   .then(response => {
-  
-//     entryPoint.append(gitCard(response))
-//   })
-//   .catch(error => {
-//     console.log('The data did not go through', error);
-//   });
-// })
-
-// axios.get("https://dog.ceo/api/breed/mastiff/images/random/12")
-// .then(response => {
-//   // console.log(response);
-//   response.data.forEach(item => {
-//     const newPerson = gitCard(response);
-//     entryPoint.append(gitCard(response));
-//   })
-// })
-// .catch( error => {
-//   console.log("the data was not returned", error)
-// })
