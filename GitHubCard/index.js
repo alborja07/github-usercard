@@ -30,21 +30,22 @@ const followersArray = [
   "Kat2bk",
   "SethC16",
   "Kylecole01",
-  "MaxiCB"
+  "MaxiCB",
 ];
 
 container = document.querySelector(".cards");
 
-for (var i = 0; i < followersArray.length; i++){
-axios.get("https://api.github.com/users/" + followersArray[i])
-.then(response => {
-    console.log(response);  
-  container.appendChild(gitCard(response.data));
-   })
+for (var i = 0; i < followersArray.length; i++) {
+  axios
+    .get("https://api.github.com/users/" + followersArray[i])
+    .then((response) => {
+      console.log(response);
+      container.appendChild(gitCard(response.data));
+    })
 
-.catch(error => {
-  console.log('the data did not go through', error);
-});
+    .catch((error) => {
+      console.log("the data did not go through", error);
+    });
 }
 
 /* Step 3: Create a function that accepts a single object as its only argument,
@@ -67,8 +68,6 @@ axios.get("https://api.github.com/users/" + followersArray[i])
 
 */
 
-
-
 /* List of LS Instructors Github username's: 
   tetondan
   dustinmyers
@@ -78,59 +77,62 @@ axios.get("https://api.github.com/users/" + followersArray[i])
 */
 
 function gitCard(obj) {
-  const newCard = document.createElement('div'),
-        newImage = document.createElement('img'),
-        cardInfo = document.createElement('div'),
-        user = document.createElement('h3'),
-        userName = document.createElement('p'),
-        location = document.createElement('p'),
-        profile = document.createElement('a'),
-        followers = document.createElement('p'),
-        following = document.createElement('p'),
-        bio = document.createElement('p');
-        
-newImage.setAttribute('src', obj.avatar_url);
-user.textContent = obj.name;
-userName.textContent = obj.login;
-location.textContent = `Location: ${obj.location}`;
-profile.setAttribute('href', obj.html_url);
-followers.textContent = `Followers: ${obj.followers}`;
-following.textContent = `Following: ${obj.following}`;
-bio.textContent = `Bio: ${obj.bio}`;
+  const newCard = document.createElement("div"),
+    newImage = document.createElement("img"),
+    cardInfo = document.createElement("div"),
+    user = document.createElement("h3"),
+    userName = document.createElement("p"),
+    location = document.createElement("p"),
+    profile = document.createElement("p"),
+    profileUrl = document.createElement('a'),
+    followers = document.createElement("p"),
+    following = document.createElement("p"),
+    bio = document.createElement("p");
 
-newCard.classList.add('card');
-// newImage.classList.add('header');
-cardInfo.classList.add('card-info');
-user.classList.add('name');
-userName.classList.add('username');
-bio.classList.add('p');
+  newImage.setAttribute("src", obj.avatar_url);
+  user.textContent = obj.name;
+  userName.textContent = obj.login;
+  location.textContent = `Location: ${obj.location}`;
 
-newCard.append(newImage),
-newCard.append(cardInfo);
-cardInfo.append(user);
-cardInfo.append(userName);
-cardInfo.append(location);
-cardInfo.append(profile);
-cardInfo.append(followers);
-cardInfo.append(following);
-cardInfo.append(bio);
+  // profile.setAttribute('href', obj.html_url);
+  profile.textContent = "Profile: ";
+  profileUrl.textContent =  obj.html_url;
+  profileUrl.href = obj.html_url;
 
-return newCard;
+  followers.textContent = `Followers: ${obj.followers}`;
+  following.textContent = `Following: ${obj.following}`;
+  bio.textContent = `Bio: ${obj.bio}`;
+
+  newCard.classList.add("card");
+  // newImage.classList.add('header');
+  cardInfo.classList.add("card-info");
+  user.classList.add("name");
+  userName.classList.add("username");
+  bio.classList.add("p");
+
+  newCard.append(newImage), newCard.append(cardInfo);
+  cardInfo.append(user);
+  cardInfo.append(userName);
+  cardInfo.append(location);
+  cardInfo.append(profile);
+  cardInfo.append(followers);
+  cardInfo.append(following);
+  cardInfo.append(bio);
+  profile.appendChild(profileUrl);
+
+  return newCard;
 }
-
-
 
 const entryPoint = document.querySelector(".cards");
 
-console.log(entryPoint)
+console.log(entryPoint);
 
-axios.get("https://api.github.com/users/alborja07")
-.then(response => {
-   entryPoint.append(gitCard(response.data));
+axios
+  .get("https://api.github.com/users/alborja07")
+  .then((response) => {
+    console.log(response.data);
+    entryPoint.append(gitCard(response.data));
   })
-.catch(error => {
-  console.log('the data did not go through', error)
-});
-
-
-
+  .catch((error) => {
+    console.log("the data did not go through", error);
+  });
